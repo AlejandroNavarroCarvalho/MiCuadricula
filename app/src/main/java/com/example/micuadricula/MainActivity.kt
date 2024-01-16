@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -59,9 +60,9 @@ fun TopicApp () {
 
 @Composable
 fun TopicList(topicList: List<Topic>, modifier: Modifier = Modifier) {
-    LazyVerticalGrid(contentPadding = PaddingValues(8.dp) ,
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    LazyVerticalGrid(contentPadding = PaddingValues(dimensionResource(id = R.dimen.padding_small)) ,
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small)),
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small)),
         columns = GridCells.Fixed(2),
         modifier = modifier) {
         items(topicList) { topic ->
@@ -80,14 +81,16 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
                 painter = painterResource(topic.imageResourceId),
                 contentDescription = stringResource(topic.stringResourceId),
                 modifier = Modifier
-                    .height(68.dp)
-                    .width(68.dp),
+                    .height(dimensionResource(id =R.dimen.padding_superHuge))
+                    .width(dimensionResource(id = R.dimen.padding_superHuge)),
                 contentScale = ContentScale.Crop
             )
-            Column (modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)){
+            Column (modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_medium), start = dimensionResource(
+                id = R.dimen.padding_medium
+            ), end = dimensionResource(id = R.dimen.padding_medium))){
                 Text(
                     text = LocalContext.current.getString(topic.stringResourceId),
-                    modifier = Modifier.padding(bottom = 8.dp),
+                    modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_small)),
                     style = MaterialTheme.typography.bodyMedium
                 )
                 Row (modifier = Modifier,
@@ -95,7 +98,7 @@ fun TopicCard(topic: Topic, modifier: Modifier = Modifier) {
                     Icon(painter = painterResource(id = R.drawable.ic_grain), contentDescription = null)
                     Text(
                         text = topic.points.toString(),
-                        modifier = Modifier.padding(start = 8.dp),
+                        modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_small)),
                         style = MaterialTheme.typography.labelMedium
                     )
                 }
